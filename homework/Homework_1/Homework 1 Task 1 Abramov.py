@@ -1,5 +1,6 @@
 def findres(x):
-    res = (x**2+1)*(x**2+x)+1
+    z = x**2
+    res = (z+1)*(z+x)+1
     ans = f'{x}^4+{x}^3+x^{2}+x+1 = {res}'
     return ans
 

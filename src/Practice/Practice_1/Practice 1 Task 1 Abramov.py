@@ -9,7 +9,7 @@ def res(a, b):
         n += 1
     q = a - b * c
     return c, q
-    
+
 
 def sear():
     a = int(input("Введите число а(делимое):"))
@@ -18,6 +18,6 @@ def sear():
     print(f"Результат деления и остаток {res(a,b)}")
     # r=a-b*q
 
+
 if __name__ == "__main__":
     sear()
-

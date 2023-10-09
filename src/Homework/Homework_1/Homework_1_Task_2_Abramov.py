@@ -1,10 +1,13 @@
 import math as m
 
+
 def scalar_product(a, b):
     res = 0
     for i in range(len(a)):
         res += a[i] * b[i]
     return res
+
+
 def length(a):
     sum = 0
     for i in range(len(a)):
@@ -32,7 +35,6 @@ def mat1():
         print()
 
 
-
 def mat2():
     n, m = int(input("Введите количество строк для 1-й матрицы:")), int(
         input("Введите количество столбцов для 1-й матрицы:")
@@ -40,7 +42,7 @@ def mat2():
     print("Вводите через пробел числа строки для 1-й матрицы:")
     matrix_1 = []
     for i in range(n):
-        matrix_1.append(list(map(int,input().split())))
+        matrix_1.append(list(map(int, input().split())))
     a, b = int(input("Введите количество строк для 2-й матрицы:")), int(
         input("Введите количество столбцов для 2-й матрицы:")
     )
@@ -98,6 +100,7 @@ def matsp():
         mat2()
     if choice == 3:
         mat3()
+        
 
 def vek1():
     vek_a = list(map(int, input("Введите значения вектора a через пробел: ").split()))

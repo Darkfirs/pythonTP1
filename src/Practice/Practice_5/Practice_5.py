@@ -30,16 +30,11 @@ def pop(stack: Stack) -> None:
         stack.head = stack.head.next
 
 
-<<<<<<< HEAD
-
 def new_stack():
     return Stack()
 
 
-def push(stack : Stack,value:any):
-=======
 def push(stack: Stack, value: any):
->>>>>>> 2c7f515fa39ebe2b186d293e07a0f272fcdfe7fd
     stack.size += 1
     new = StackElement(value, stack.head)
     stack.head = new

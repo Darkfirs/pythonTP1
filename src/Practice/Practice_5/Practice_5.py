@@ -2,24 +2,24 @@ from dataclasses import dataclass
 from collections import namedtuple
 
 
-StackElement = namedtuple("StackElement",["value","next"])
+StackElement = namedtuple("StackElement", ["value", "next"])
 
 
 @dataclass
 class Stack:
-    size : int = 0
-    head : StackElement = None
+    size: int = 0
+    head: StackElement = None
 
 
-def size(stack : Stack):
+def size(stack: Stack):
     return stack.size
 
 
-def empty(stack : Stack):
+def empty(stack: Stack):
     return stack.size == 0
 
 
-def top(stack : Stack):
+def top(stack: Stack):
     if not empty(stack):
         return stack.head.value
 
@@ -30,24 +30,26 @@ def pop(stack: Stack) -> None:
         stack.head = stack.head.next
 
 
+<<<<<<< HEAD
 
 def new_stack():
     return Stack()
 
 
 def push(stack : Stack,value:any):
+=======
+def push(stack: Stack, value: any):
+>>>>>>> 2c7f515fa39ebe2b186d293e07a0f272fcdfe7fd
     stack.size += 1
-    new = StackElement(value,stack.head)
+    new = StackElement(value, stack.head)
     stack.head = new
 
 
 if __name__ == "__main__":
     stack1 = new_stack()
     for i in range(15):
-        push(stack1,i)
+        push(stack1, i)
     print(empty(stack1))
     print(top(stack1))
     pop(stack1)
     print(top(stack1))
-
-

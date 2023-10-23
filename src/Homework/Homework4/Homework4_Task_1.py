@@ -21,7 +21,7 @@ def reverse_number_code(number):
         for i in range(1, len(number)):
             if number[i] == 0:
                 number[i] = 1
-            elif number[i]==1:
+            elif number[i] == 1:
                 number[i] = 0
         return number
 
@@ -41,11 +41,7 @@ def change_numbers(number1, number2, negative_number):
     ng = negative_number
     if len(n1) > len(n2):
         n2 = [n2[0]] + [0] * (len(n1) - len(n2)) + n2[1:]
-        ng = (
-            [ng[0]]
-            + [0] * (len(n1) - len(ng))
-            + ng[1:]
-        )
+        ng = [ng[0]] + [0] * (len(n1) - len(ng)) + ng[1:]
         return n1, n2, ng
     elif len(n2) > len(n1):
         n1 = [n1[0]] + [0] * (len(n2) - len(n1)) + n1[1:]
@@ -59,7 +55,8 @@ def creat_working_number(number1, number2):
     bin_code2 = binary_representation(number2)
     bin_negative_code = binary_representation(-number2)
     bin_code1, bin_code2, bin_negative_code = change_numbers(
-        bin_code1, bin_code2, bin_negative_code)
+        bin_code1, bin_code2, bin_negative_code
+    )
     reverse_code1 = reverse_number_code(bin_code1)
     reverse_code2 = reverse_number_code(bin_code2)
     reverse_negative_code = reverse_number_code(bin_negative_code)
@@ -89,9 +86,7 @@ def calculate_sum(number1, number2):
     return result
 
 
-def speaker_to_output(
-    bin_number1, bin_number2, bin_reverse, number1, number2
-):
+def speaker_to_output(bin_number1, bin_number2, bin_reverse, number1, number2):
     bin_number1_string = "".join(map(str, bin_number1))
     print("The first number in binary form:", bin_number1_string)
     bin_number2_string = "".join(map(str, bin_number2))
@@ -117,3 +112,4 @@ if __name__ == "__main__":
     speaker_to_output(
         first_code, second_code, second_reverse_code, first_number, second_number
     )
+    

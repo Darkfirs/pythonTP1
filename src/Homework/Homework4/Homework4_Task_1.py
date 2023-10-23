@@ -112,4 +112,3 @@ if __name__ == "__main__":
     speaker_to_output(
         first_code, second_code, second_reverse_code, first_number, second_number
     )
-    

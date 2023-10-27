@@ -1,6 +1,7 @@
 import os
 import sys
 
+
 def check_files(file1, file2):
     if os.path.isfile(f"{file1}") and not (os.path.isfile(f"{file2}")):
         return True

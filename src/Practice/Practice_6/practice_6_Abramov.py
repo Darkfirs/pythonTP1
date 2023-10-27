@@ -1,5 +1,6 @@
 import math as m
 
+
 def float_numbers(coefficient):
     try:
         float(coefficient)
@@ -19,14 +20,14 @@ def select_formula(a, b, c):
 def solution_quadratic(a, b, c):
     d = b**2 - 4 * a * c
     if d == 0:
-        return (-b / (2 * a), )
+        return (-b / (2 * a),)
     elif d > 0:
         return [(-b + m.sqrt(d)) / (2 * a), (-b - m.sqrt(d)) / (2 * a)]
     raise ArithmeticError("Discriminant must be non-negative")
 
 
 def solution_linear(b, c):
-    return (-c / b, )
+    return (-c / b,)
 
 
 def solve_constant_equation(c):

@@ -1,4 +1,4 @@
-from Practice.Practice_6.practice_6_Abramov import *
+from src.Practice.Practice_6.practice_6_Abramov import *
 from io import StringIO
 import pytest
 

@@ -101,6 +101,7 @@ def test_raise_exception_parse_user_input(coefficients):
 def test_solve_equations(a, b, c, expected):
     assert select_formula(a, b, c) == expected
 
+
 @pytest.mark.parametrize(
     "user_input,expected",
     [

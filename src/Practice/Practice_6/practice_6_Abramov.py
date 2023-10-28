@@ -9,11 +9,11 @@ def float_numbers(coefficient):
         return False
 
 
-def select_formula(a, b, c):
+def solve_equations(a, b, c):
     if a != 0:
         return tuple(sorted(solution_quadratic(a, b, c)))
     elif b != 0:
-        return solution_linear(b, c)
+        return (solution_linear(b, c),)
     return solve_constant_equation(c)
 
 
@@ -27,7 +27,7 @@ def solution_quadratic(a, b, c):
 
 
 def solution_linear(b, c):
-    return (-c / b,)
+    return -c / b
 
 
 def solve_constant_equation(c):
@@ -36,7 +36,7 @@ def solve_constant_equation(c):
     raise ArithmeticError("Infinitely many solutions")
 
 
-def checking_arguments(numbers):
+def parse_user_input(numbers):
     numbers = numbers.split()
     if len(numbers) != 3:
         raise ValueError("Not 3 arguments were entered")
@@ -48,8 +48,8 @@ def checking_arguments(numbers):
 def main():
     arguments = input("Enter three float numbers a, b, c: ")
     try:
-        arguments = checking_arguments(arguments)
-        print(f"Solution:", *select_formula(*arguments))
+        arguments = parse_user_input(arguments)
+        print(f"Solution:", *solve_equations(*arguments))
     except ValueError as e:
         print(str(e))
     except ArithmeticError as e:

@@ -11,6 +11,8 @@ jobs:
         with:
           python-version: 3.11.5
       - name: "installation"
-        run: pip install black
+        run: pip install black pytest
       - name: "black"
         run: black . --check --diff --color
+      - name: "pytest"
+        run: python -m pytest tests

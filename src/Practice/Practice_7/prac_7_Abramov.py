@@ -71,4 +71,3 @@ def remove(tree, key):
     if tree.root is None:
         raise AttributeError("No such key")
     return remove_node(tree.root, key)
-    

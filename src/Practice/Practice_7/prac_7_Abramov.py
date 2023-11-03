@@ -4,6 +4,7 @@ from typing import Optional, Generic, TypeVar
 
 V = TypeVar("V")
 
+
 @dataclass
 class Tree(Generic[V]):
     root: Optional["TreeNode"]
@@ -22,7 +23,7 @@ def create_tree_map():
     return Tree(None)
 
 
-def put(tree: Tree,key: int, value):
+def put(tree: Tree, key: int, value):
     if tree.size != 0:
         put_node(tree.root, key, value)
     else:
@@ -32,22 +33,21 @@ def put(tree: Tree,key: int, value):
 
 def put_node(tree_root: TreeNode, key: int, value: V):
     if tree_root is None:
-        return TreeNode(key,value,None,None)
+        return TreeNode(key, value, None, None)
     if key > tree_root.key:
-        tree_root.right = put_node(tree_root.right,key,value)
+        tree_root.right = put_node(tree_root.right, key, value)
     if key < tree_root.key:
         tree_root.left = put_node(tree_root.left, key, value)
     return tree_root
 
 
-def put_root(tree: Tree, key: int,value: V):
-    tree.root = TreeNode(key,value,None,None)
+def put_root(tree: Tree, key: int, value: V):
+    tree.root = TreeNode(key, value, None, None)
 
 
 def remove_node(tree_root, key):
     if tree_root is None:
         raise AttributeError("No key in tree")
-
 
     def remove_recursion(tree_root, key):
         if tree_root.key < key:
@@ -71,3 +71,4 @@ def remove(tree, key):
     if tree.root is None:
         raise AttributeError("No such key")
     return remove_node(tree.root, key)
+    

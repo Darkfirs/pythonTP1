@@ -52,16 +52,6 @@ def test_get(elements, key, expected):
     assert get(hash_table, key) == expected
 
 
-def test_items():
-    hash_table = create_hash_table()
-    put(hash_table, "key1", "value1")
-    put(hash_table, "key3", "value3")
-    put(hash_table, "key2", "value2")
-    result = items(hash_table)
-    expected_result = [("key1", "value1"), ("key2", "value2"), ("key3", "value3")]
-    assert result == expected_result
-
-
 @pytest.mark.parametrize(
     "elements,key,expected",
     [

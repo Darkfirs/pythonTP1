@@ -75,12 +75,15 @@ def test_has_key(elements, key, expected):
     assert has_key(hash_table, key) == expected
 
 
-@pytest.mark.parametrize("key, value", [("test_key", "test_value"), ("another_key", 42)])
+@pytest.mark.parametrize(
+    "key, value", [("test_key", "test_value"), ("another_key", 42)]
+)
 def test_put_and_get(key, value):
     hash_table = create_hash_table()
     put(hash_table, key, value)
     retrieved_value = get(hash_table, key)
     assert retrieved_value == value
+
 
 @pytest.mark.parametrize(
     "elements,key",

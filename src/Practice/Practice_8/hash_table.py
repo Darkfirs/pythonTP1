@@ -3,6 +3,7 @@ from dataclasses import dataclass
 
 DEF_SIZE = 16
 
+
 @dataclass
 class HashTable:
     size: int

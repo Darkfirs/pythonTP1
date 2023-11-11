@@ -1,92 +1,97 @@
-from src.Practice.Practice_8.hash_table import *
 import pytest
+from src.Practice.Practice_8.hash_table import *
 
 
-def test_create_hashtable():
-    test_hashtable = create_hashtable()
-    assert (
-        test_hashtable.capacity == 1024
-        and len(test_hashtable.table) == 1024
-        and test_hashtable.size == 0)
-
-
-def dummy_hashtable(elements):
-    hashtable = create_hashtable()
+def dummy_hash_table(elements: tuple):
+    hash_table = create_hash_table()
     for i in elements:
-        put(hashtable, i[0], i[1])
-    return hashtable
+        put(hash_table, i[0], i[1])
+    return hash_table
 
 
-def test_delete_hashtable():
-    test_hashtable = create_hashtable()
-    test_hashtable = delete_hashtable(test_hashtable)
-    assert test_hashtable is None
+def test_create_hash_table():
+    has_table = create_hash_table()
+    assert isinstance(has_table, HashTable)
 
 
-@pytest.mark.parametrize(
-    "elements, put_element, expected",
-    (
-        (((7, 12), (2, 5), (3, 1)), (18, 15), [(2, 5), (3, 1), (7, 12), (18, 15)]),
-        (
-            ((1, 1), (2, 2), (3, 3)),
-            ("Notnone", None),
-            [(1, 1), (2, 2), (3, 3), ("Notnone", None)],
-        ),
-    ),
-)
-def test_put(elements, put_element, expected):
-    test_hashtable = dummy_hashtable(elements)
-    put(test_hashtable, *put_element)
-    assert items(test_hashtable) == expected
+def test_remove():
+    hash_table = create_hash_table()
+    key = "test_key"
+    value = "test_value"
+    put(hash_table, key, value)
+    removed_value = remove(hash_table, key)
+    assert removed_value == value
+    with pytest.raises(ValueError, match=f"Key '{key}' not found in the hash table"):
+        remove(hash_table, key)
 
 
 @pytest.mark.parametrize(
-    "elements, find_key, expected",
-    (
-        (((1, 1), (2, 2), (3, 3), ("Notnone", None)), "Notnone", True),
-        (((1, 1), (2, 2), (3, 3), (15, 15)), 2, True),
-        (((20, 20), (30, 30)), 15, False),
-    ),
+    "elements,key",
+    [
+        ((("may 1", 1), ("may 2", 2), ("may 3", 3), ("may 4", 4)), "may 123"),
+        ((("may 1", 1), ("may 2", 2), ("may 3", 3), ("may 4", 4)), "may 23"),
+        ((("may 1", 1), ("may 2", 2), ("may 3", 3), ("may 4", 4)), "may 5"),
+    ],
 )
-def test_has_key(elements, find_key, expected):
-    test_hashtable = dummy_hashtable(elements)
-    assert has_key(test_hashtable, find_key) == expected
+def test_error_remove(elements, key):
+    hash_table = dummy_hash_table(elements)
+    with pytest.raises(ValueError):
+        remove(hash_table, key)
 
 
 @pytest.mark.parametrize(
-    "elements, get_key, expected",
-    (
-        (((1, 1), (2, 2), (3, 3), ("Notnone", None)), "Notnone", None),
-        (((1, 1), (2, 2), (3, 3), (5, 5)), 2, 2),
-        (((20, 20), (30, 30), (19, "qwer")), 19, "qwer"),
-    ),
+    "elements,key,expected",
+    [
+        ((("may 1", 1), ("may 2", 2), ("may 3", 3), ("may 4", 4)), "may 4", 4),
+        ((("may 1", 1), ("may 2", 2), ("may 3", 3), ("may 4", 4)), "may 3", 3),
+        ((("may 1", 1), ("may 2", 2), ("may 3", 3), ("may 4", 4)), "may 1", 1),
+    ],
 )
-def test_get(elements, get_key, expected):
-    test_hashtable = dummy_hashtable(elements)
-    assert get(test_hashtable, get_key) == expected
+def test_get(elements, key, expected):
+    hash_table = dummy_hash_table(elements)
+    assert get(hash_table, key) == expected
 
-def test_remove_error():
-    test_hashtable = create_hashtable()
-    with pytest.raises(KeyError):
-        assert remove(test_hashtable, 4) == KeyError
-
-
-def test_get_error():
-    test_hashtable = create_hashtable()
-    with pytest.raises(KeyError):
-        assert get(test_hashtable, 10) == KeyError
 
 @pytest.mark.parametrize(
-    "elements, expected",
-    (
-        (
-            ((1, 1), (2, 2), (3, 3), ("Notnone", None)),
-            [(1, 1), (2, 2), (3, 3), ("Notnone", None)],
-        ),
-        (((1, 1), (7, 7), (3, 3), (9, 9)), [(1, 1), (3, 3), (7, 7), (9, 9)]),
-        (((25, 25), (50, 50)), [(25, 25), (50, 50)]),
-    ),
+    "elements,key",
+    [
+        ((("may 1", 1), ("may 2", 2), ("may 3", 3), ("may 4", 4)), "may 123"),
+        ((("may 1", 1), ("may 2", 2), ("may 3", 3), ("may 4", 4)), "may 23"),
+        ((("may 1", 1), ("may 2", 2), ("may 3", 3), ("may 4", 4)), "may 5"),
+    ],
 )
-def test_items(elements, expected):
-    test_hashtable = dummy_hashtable(elements)
-    assert items(test_hashtable) == expected
+def test_error_get(elements, key):
+    hash_table = dummy_hash_table(elements)
+    with pytest.raises(ValueError):
+        get(hash_table, key)
+
+
+@pytest.mark.parametrize(
+    "elements,key,expected",
+    [
+        ((("may 1", 1), ("may 2", 2), ("may 3", 3), ("may 4", 4)), "may 4", True),
+        ((("may 1", 1), ("may 2", 2), ("may 3", 3), ("may 4", 4)), "may 3", True),
+        ((("may 1", 1), ("may 2", 2), ("may 3", 3), ("may 4", 4)), "may 11", False),
+    ],
+)
+def test_has_key(elements, key, expected):
+    hash_table = dummy_hash_table(elements)
+    assert has_key(hash_table, key) == expected
+
+
+def test_items():
+    hash_table = create_hash_table()
+    put(hash_table, "key1", "value1")
+    put(hash_table, "key3", "value3")
+    put(hash_table, "key2", "value2")
+    result = items(hash_table)
+    expected_result = [("key1", "value1"), ("key2", "value2"), ("key3", "value3")]
+    assert result == expected_result
+
+
+@pytest.mark.parametrize("key, value", [("test_key", "test_value"), ("another_key", 42)])
+def test_put_and_get(key, value):
+    hash_table = create_hash_table()
+    put(hash_table, key, value)
+    retrieved_value = get(hash_table, key)
+    assert retrieved_value == value

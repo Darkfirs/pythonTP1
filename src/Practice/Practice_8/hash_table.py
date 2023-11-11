@@ -1,101 +1,68 @@
 from dataclasses import dataclass
-from typing import *
 
-Key = TypeVar("Key")
-Value = TypeVar("Value")
-def_capacity = 1024
 
+DEF_SIZE = 16
 
 @dataclass
-class Node(Generic[Key, Value]):
-    key: Key
-    value: Value
-    next: "Node" = None
+class HashTable:
+    size: int
+    table: list[list[tuple[str, object]]] = None
+
+    def __post_init__(self):
+        if self.table is None:
+            self.table = [[] for _ in range(self.size)]
 
 
-@dataclass
-class HashTable(Generic[Key, Value]):
-    table: list[Optional["Node[Key, Value]"]]
-    capacity: int = def_capacity
-    size: int = 0
-    hash_fn: Callable[[Any], Key] = hash
-
-    def hash_func(self, key):
-        return self.hash_fn(key) % self.capacity
+def hash_function(table_size: int, key: str) -> int:
+    return hash(key) % table_size
 
 
-def create_hashtable(capacity: int = def_capacity) -> HashTable:
-    return HashTable([None] * capacity)
+def create_hash_table() -> HashTable:
+    return HashTable(size=DEF_SIZE)
 
 
-def put(hashtable: HashTable, key: Key, value: Value):
-    if hashtable.table[hashtable.hash_func(key)] is None:
-        hashtable.table[hashtable.hash_func(key)] = Node(key, value)
-        hashtable.size += 1
+def delete_hash_table(hash_table: HashTable):
+    del hash_table
+
+
+def put(hash_table: HashTable, key: str, value: object):
+    hash_value = hash_function(hash_table.size, key)
+    bucket = hash_table.table[hash_value]
+    for i, (existing_key, existing_value) in enumerate(bucket):
+        if key == existing_key:
+            bucket[i] = (key, value)
+            break
     else:
-        current = hashtable.table[hashtable.hash_func(key)]
-        while current:
-            if current.key == key:
-                current.value = value
-                return
-            current = current.next
-        new_node = Node(key, value)
-        new_node.next = hashtable.table[hashtable.hash_func(key)]
-        hashtable.table[hashtable.hash_func(key)] = new_node
-        hashtable.size += 1
+        bucket.append((key, value))
 
 
-def items(hashtable: HashTable) -> list[tuple[Key, Value]]:
-    res_pa = []
-    num = 0
-    while len(res_pa) != hashtable.size and num != hashtable.capacity:
-        if hashtable.table[num] is not None:
-            res_pa.append((hashtable.table[num].key, hashtable.table[num].value))
-        num += 1
-    return res_pa
+def remove(hash_table: HashTable, key: str) -> object:
+    hash_value = hash_function(hash_table.size, key)
+    bucket = hash_table.table[hash_value]
+    for i, (existing_key, existing_value) in enumerate(bucket):
+        if key == existing_key:
+            del bucket[i]
+            return existing_value
+    raise ValueError(f"Key '{key}' not found in the hash table")
 
 
-def remove(hashtable: HashTable, key: Key) -> Value:
-    if not has_key(hashtable, key):
-        raise KeyError
-    previous = None
-    current = hashtable.table[hashtable.hash_func(key)]
-    return_value = current.value
-    while current:
-        if current.key == key:
-            if previous:
-                previous.next = current.next
-            else:
-                hashtable.table[hashtable.hash_func(key)] = current.next
-            hashtable.size -= 1
-            return return_value
-        previous = current
-        current = current.next
+def has_key(hash_table: HashTable, key: str) -> bool:
+    hash_value = hash_function(hash_table.size, key)
+    bucket = hash_table.table[hash_value]
+    return any(existing_key == key for existing_key, _ in bucket)
 
 
-def delete_hashtable(hashtable: HashTable):
-    for num in range(hashtable.capacity):
-        element_to_del = hashtable.table[num]
-
-        def del_rec(element_to_delete):
-            if element_to_delete is None:
-                del element_to_delete
-                return
-            if element_to_delete.next is None:
-                del element_to_delete.next
-                del element_to_delete
-                return
-            del_rec(element_to_delete.next)
-
-        del_rec(element_to_del)
-    del hashtable
+def get(hash_table: HashTable, key: str) -> object:
+    hash_value = hash_function(hash_table.size, key)
+    bucket = hash_table.table[hash_value]
+    for existing_key, existing_value in bucket:
+        if key == existing_key:
+            return existing_value
+    raise ValueError(f"Key '{key}' not found in the hash table")
 
 
-def get(hashtable: HashTable, key: Key) -> Value:
-    if not has_key(hashtable, key):
-        raise KeyError
-    return hashtable.table[hashtable.hash_func(key)].value
-
-
-def has_key(hashtable: HashTable, key: Key) -> bool:
-    return hashtable.table[hashtable.hash_func(key)] is not None
+def items(hash_table: HashTable) -> list[tuple[str, object]]:
+    result = []
+    for bucket in hash_table.table:
+        result.extend(bucket)
+    return result

@@ -10,3 +10,4 @@ if __name__ == '__main__':
     print(is_empty(queue))
     print(f"new size:",get_size(queue))
     print(f"top:",get_top(queue))
+    print(last(queue))

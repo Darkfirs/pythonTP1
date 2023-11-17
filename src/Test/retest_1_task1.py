@@ -19,13 +19,13 @@ def check_file(file_in, file_out):
 
 
 def merge_and_save(input_file, output_file):
-    with open(input_file, 'r') as file:
+    with open(input_file, "r") as file:
         lines = file.readlines()
         sequence1 = list(map(int, lines[0].split()))
         sequence2 = list(map(int, lines[1].split()))
         result_sequence = merge_sequences(sequence1, sequence2)
-    with open(output_file, 'w') as file:
-        file.write(' '.join(map(str, result_sequence)))
+    with open(output_file, "w") as file:
+        file.write(" ".join(map(str, result_sequence)))
     print("Done")
 
 

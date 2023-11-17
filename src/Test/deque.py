@@ -3,8 +3,8 @@ from dataclasses import dataclass
 @dataclass
 class DequeNode:
     data: any
-    next: 'DequeNode' = None
-    prev: 'DequeNode' = None
+    next: "DequeNode" = None
+    prev: "DequeNode" = None
 
 
 @dataclass

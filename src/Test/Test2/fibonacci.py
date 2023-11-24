@@ -13,7 +13,7 @@ def check_enter(n):
         print("You must enter integer number")
         return False
     n = int(n)
-    if not(0 <= n <= 90):
+    if not (0 <= n <= 90):
         print("You must enter number between 0 and 90")
         return False
     return True

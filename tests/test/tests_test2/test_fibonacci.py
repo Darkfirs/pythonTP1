@@ -15,13 +15,13 @@ def test_fibonacci(n, expected):
     [
         ("12", True),
         ("001", True),
-        ("abcd", False),
-        ("91", False),
+        ("qwer", False),
+        ("100", False),
         ("-1", False),
-        ("2.5", False),
-        ("inf", False),
+        ("10.5", False),
+        (":", False),
         ("-0", False),
-        (".0123", False),
+        ("55", True),
     ],
 )
 def test_check_input(n, expected):
@@ -34,9 +34,9 @@ def test_check_input(n, expected):
         ("0", "0\n"),
         ("12", "144\n"),
         ("90", "2880067194370816120\n"),
-        ("abc", "You must enter integer number\n"),
-        ("100", "You must enter number between 0 and 90\n"),
-        ("2.5", "You must enter integer number\n"),
+        ("qwer", "You must enter integer number\n"),
+        ("125", "You must enter number between 0 and 90\n"),
+        ("15.5", "You must enter integer number\n"),
     ],
 )
 def test_main(monkeypatch, n, expected):

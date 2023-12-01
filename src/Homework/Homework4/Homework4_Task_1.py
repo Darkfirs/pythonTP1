@@ -1,38 +1,37 @@
-def binary_representation(number):
+def direct_binary_representation(number):
+    bit = []
     if number == 0:
         return [0, 0]
     elif number > 0:
-        bit = []
-        symbol = [0, 0]
+        sign_bit = [0, 0]
     else:
-        bit = []
         number = number * (-1)
-        symbol = [1, 0]
+        sign_bit = [1, 0]
     while number > 0:
         bit.append(number % 2)
         number = number // 2
-    return symbol + bit[::-1]
+    return sign_bit + bit[::-1]
 
 
-def reverse_number_code(number):
-    if number[0] == 0:
-        return number
+def reverse_number_code(bit_list):
+    if bit_list[0] == 0:
+        return bit_list
     else:
-        for i in range(1, len(number)):
-            if number[i] == 0:
-                number[i] = 1
-            elif number[i] == 1:
-                number[i] = 0
-        return number
+        for i in range(1, len(bit_list)):
+            if bit_list[i] == 0:
+                bit_list[i] = 1
+            elif bit_list[i] == 1:
+                bit_list[i] = 0
+        return bit_list
 
 
-def additional_number_code(number):
-    if number[0] == 0:
-        return number
+def additional_number_code(bit_list):
+    if bit_list[0] == 0:
+        return bit_list
     else:
-        for i in range(len(number) - 1, 0, -1):
-            if number[i] == 0:
-                return number[:i] + [1] + [0] * (len(number) - i - 1)
+        for i in range(len(bit_list) - 1, 0, -1):
+            if bit_list[i] == 0:
+                return bit_list[:i] + [1] + [0] * (len(bit_list) - i - 1)
 
 
 def change_numbers(number1, number2, negative_number):
@@ -43,17 +42,15 @@ def change_numbers(number1, number2, negative_number):
         n2 = [n2[0]] + [0] * (len(n1) - len(n2)) + n2[1:]
         ng = [ng[0]] + [0] * (len(n1) - len(ng)) + ng[1:]
         return n1, n2, ng
-    elif len(n2) > len(n1):
+    if len(n2) > len(n1):
         n1 = [n1[0]] + [0] * (len(n2) - len(n1)) + n1[1:]
         return n1, n2, ng
-    else:
-        return n1, n2, ng
 
 
-def creat_working_number(number1, number2):
-    bin_code1 = binary_representation(number1)
-    bin_code2 = binary_representation(number2)
-    bin_negative_code = binary_representation(-number2)
+def create_working_numbers(number1, number2):
+    bin_code1 = direct_binary_representation(number1)
+    bin_code2 = direct_binary_representation(number2)
+    bin_negative_code = direct_binary_representation(-number2)
     bin_code1, bin_code2, bin_negative_code = change_numbers(
         bin_code1, bin_code2, bin_negative_code
     )
@@ -95,8 +92,8 @@ def speaker_to_output(bin_number1, bin_number2, bin_reverse, number1, number2):
     bin_sum = "".join(map(str, calculate_sum(bin_number1, bin_number2)))
     print(f"{bin_number1_string} + {bin_number2_string} = {bin_sum}")
     print("The difference in binary form:")
-    difference = "".join(map(str, calculate_sum(bin_number1, bin_reverse)))
-    print(f"{bin_number1_string} - {bin_number2_string} = {difference}")
+    bin_difference = "".join(map(str, calculate_sum(bin_number1, bin_reverse)))
+    print(f"{bin_number1_string} - {bin_number2_string} = {bin_difference}")
     print("The sum in decimal form:")
     print(f"{number1} + {number2} = {number1 + number2}")
     print("The difference in decimal form:")
@@ -106,7 +103,7 @@ def speaker_to_output(bin_number1, bin_number2, bin_reverse, number1, number2):
 if __name__ == "__main__":
     first_number = int(input("First number:"))
     second_number = int(input("Second number:"))
-    first_code, second_code, second_reverse_code = creat_working_number(
+    first_code, second_code, second_reverse_code = create_working_numbers(
         first_number, second_number
     )
     speaker_to_output(

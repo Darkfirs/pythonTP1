@@ -22,10 +22,10 @@ def create_fs_d():
 @pytest.fixture
 def create_fs_abb():
     abb_fsm_table = [
-                {"b": 0, "a": 1},
-                {"b": 2, "a": 1},
-                {"b": 3, "a": 1},
-                {"b": 0, "a": 1},
+        {"b": 0, "a": 1},
+        {"b": 2, "a": 1},
+        {"b": 3, "a": 1},
+        {"b": 0, "a": 1},
     ]
     return create_fs_machine(abb_fsm_table, 0, [3])
 

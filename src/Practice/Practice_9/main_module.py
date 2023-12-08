@@ -3,7 +3,12 @@ from string import digits
 
 
 def abb_type_language_validation(input_str: str) -> bool:
-    abb_fsm_table = [{"b": 0, "a": 1}, {"b": 2, "a": 1}, {"b": 3, "a": 1}, {"b": 0, "a": 1}]
+    abb_fsm_table = [
+                {"b": 0, "a": 1},
+                {"b": 2, "a": 1},
+                {"b": 3, "a": 1},
+                {"b": 0, "a": 1},
+    ]
     fsm_abb = create_fs_machine(abb_fsm_table, start_state=0, accepted_states=[3])
     return validate_string(fsm_abb, input_str)
 
@@ -19,7 +24,9 @@ def add_digit_language_validation(input_str: str) -> bool:
         {digits: 2},
         {digits: 4},
     ]
-    fsm_digits = create_fs_machine(digits_fsm_table, start_state=0, accepted_states=[1, 2, 4])
+    fsm_digits = create_fs_machine(
+        digits_fsm_table, start_state=0, accepted_states=[1, 2, 4]
+    )
     return validate_string(fsm_digits, input_str)
 
 

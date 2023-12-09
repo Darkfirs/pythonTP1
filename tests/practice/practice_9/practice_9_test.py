@@ -69,13 +69,13 @@ def test_validate_digits(string, expected, create_fs_d):
 
 
 @pytest.mark.parametrize(
-    "string_input, expected",
+    "string, expected",
     [
-        ("123abc", "This string match no language."),
-        ("aabb", "This is abb-type language."),
-        ("-1234.123E+12", "This is Digits language."),
-        ("123.E", "This string match no language."),
+        ("qwerty", "The language wasn't found"),
+        ("aabb", "This is abb-type language"),
+        ("1111", "This is Digits"),
+        ("1.E", "The language wasn't found"),
     ],
 )
-def test_output_match(string_input, expected):
-    assert speaker(string_input) == expected
+def test_output_match(string, expected):
+    assert speaker(string) == expected

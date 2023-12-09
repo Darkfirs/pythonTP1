@@ -1,5 +1,5 @@
-from fsm import *
 from string import digits
+from . import fsm
 
 
 def abb_type_language_validation(input_str: str) -> bool:
@@ -9,8 +9,8 @@ def abb_type_language_validation(input_str: str) -> bool:
         {"b": 3, "a": 1},
         {"b": 0, "a": 1},
     ]
-    fsm_abb = create_fs_machine(abb_fsm_table, start_state=0, accepted_states=[3])
-    return validate_string(fsm_abb, input_str)
+    fsm_abb = fsm.create_fs_machine(abb_fsm_table, start_state=0, accepted_states=[3])
+    return fsm.validate_string(fsm_abb, input_str)
 
 
 def add_digit_language_validation(input_str: str) -> bool:
@@ -24,10 +24,10 @@ def add_digit_language_validation(input_str: str) -> bool:
         {digits: 2},
         {digits: 4},
     ]
-    fsm_digits = create_fs_machine(
+    fsm_digits = fsm.create_fs_machine(
         digits_fsm_table, start_state=0, accepted_states=[1, 2, 4]
     )
-    return validate_string(fsm_digits, input_str)
+    return fsm.validate_string(fsm_digits, input_str)
 
 
 def speaker(enter: str):

@@ -74,15 +74,3 @@ def pretty_print(tree, depth=0):
             pretty_print(child, depth + 4)
     else:
         print("." * depth, tree)
-
-
-# if __name__ == "__main__":
-#     input_str = input("Enter the expression: ")
-#     tokens = input_str.split()
-#     parse_tree = parse(tokens)
-#
-#     if parse_tree:
-#         print("Parse Tree:")
-#         pretty_print(parse_tree)
-#     else:
-#         print("Error in parsing.")

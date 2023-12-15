@@ -5,7 +5,7 @@ from typing import List, Union
 @dataclass
 class ParseTree:
     name: str
-    children: List[Union[str, 'ParseTree']]
+    children: List[Union[str, "ParseTree"]]
 
 
 def parse_start(tokens, current):

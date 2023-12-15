@@ -5,12 +5,7 @@ from io import StringIO
 
 @pytest.mark.parametrize(
     "file",
-    [
-        ("test1.txt"),
-        ("test2.txt"),
-        ("test3.txt"),
-        ("test4.txt")
-    ],
+    [("test1.txt"), ("test2.txt"), ("test3.txt"), ("test4.txt")],
 )
 def test_main_scenario(monkeypatch, file):
     with open(file, "r") as file:

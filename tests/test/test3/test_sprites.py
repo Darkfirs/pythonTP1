@@ -4,7 +4,8 @@ from io import StringIO
 
 
 @pytest.mark.parametrize(
-    "num,expected", [(4, True), (-5, False), ("b", False), (15, True), (0, False)])
+    "num,expected", [(4, True), (-5, False), ("b", False), (15, True), (0, False)]
+)
 def test_check_number(num, expected):
     assert check_number(num) == expected
 
@@ -17,6 +18,7 @@ def test_draw_sprite(size, capsys):
     captured = capsys.readouterr()
     for row in sprite:
         assert "".join(row) in captured.out
+
 
 def is_symmetric(sprite):
     return all(row == row[::-1] for row in sprite)

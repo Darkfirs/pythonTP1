@@ -4,8 +4,8 @@ from io import StringIO
 
 
 @pytest.mark.parametrize(
-    "num,expected", [(4, True), (-5, False), ("b", False), (15, True), (0, False)]
-def test_check_enter(num, expected):
+    "num,expected", [(4, True), (-5, False), ("b", False), (15, True), (0, False)])
+def test_check_number(num, expected):
     assert check_number(num) == expected
 
 

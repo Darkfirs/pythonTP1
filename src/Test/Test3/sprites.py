@@ -1,7 +1,7 @@
 import random
 
-SPRITE_CHAR = '█'
-EMPTY_CHAR = ' '
+SPRITE_CHAR = "█"
+EMPTY_CHAR = " "
 ERROR_alpha = 0
 ERROR_digit = 0
 
@@ -9,11 +9,17 @@ ERROR_digit = 0
 def generate_symmetric_sprite(size_s):
     sprite = []
     for i in range(size_s // 2):
-        row = [SPRITE_CHAR if random.choice([True, False]) else EMPTY_CHAR for _ in range(size_s)]
+        row = [
+            SPRITE_CHAR if random.choice([True, False]) else EMPTY_CHAR
+            for _ in range(size_s)
+        ]
         sprite.append(row + row[::-1])
 
     if size_s % 2 == 1:
-        center_row = [SPRITE_CHAR if random.choice([True, False]) else EMPTY_CHAR for _ in range(size_s)]
+        center_row = [
+            SPRITE_CHAR if random.choice([True, False]) else EMPTY_CHAR
+            for _ in range(size_s)
+        ]
         sprite.append(center_row + center_row[::-1])
 
     return sprite
@@ -21,7 +27,7 @@ def generate_symmetric_sprite(size_s):
 
 def draw_sprite(sprite):
     for row in sprite:
-        print(''.join(row))
+        print("".join(row))
 
 
 def check_number(size_s):
@@ -44,7 +50,7 @@ def main(size_s):
             draw_sprite(sprite)
 
             more = input("Хотите сгенерировать еще один спрайт? (y/n): ").lower()
-            if more == 'y':
+            if more == "y":
                 continue
             else:
                 break

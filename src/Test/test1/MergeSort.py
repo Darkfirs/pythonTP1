@@ -4,8 +4,8 @@ from typing import List, Any
 def correct_elem(array: List[Any]):
     if not all(isinstance(element, type(array[0])) for element in array):
         raise TypeError(
-                        "All elements in the array must be of the same type and comparable."
-            )
+            "All elements in the array must be of the same type and comparable."
+        )
     else:
         merge_sort(array)
 

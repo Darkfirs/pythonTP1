@@ -1,0 +1,81 @@
+import pytest
+from src.Practice.Practice_9.main_module import *
+from string import digits
+from src.Practice.Practice_9.fsm import *
+
+
+@pytest.fixture
+def create_fs_d():
+    digits_fsm_table = [
+        {digits: 1, "+-": 5},
+        {digits: 1, "E": 3, ".": 6},
+        {digits: 2, "E": 3},
+        {digits: 4, "+-": 7},
+        {digits: 4},
+        {digits: 1},
+        {digits: 2},
+        {digits: 4},
+    ]
+    return create_fs_machine(digits_fsm_table, 0, [1, 2, 4])
+
+
+@pytest.fixture
+def create_fs_abb():
+    abb_fsm_table = [
+        {"b": 0, "a": 1},
+        {"b": 2, "a": 1},
+        {"b": 3, "a": 1},
+        {"b": 0, "a": 1},
+    ]
+    return create_fs_machine(abb_fsm_table, 0, [3])
+
+
+@pytest.mark.parametrize(
+    "string, expected",
+    [
+        ("", False),
+        (" ", False),
+        ("1111", False),
+        ("abb", True),
+        ("qwerty", False),
+        ("bab", False),
+        ("aabb", True),
+        ("abba", False),
+    ],
+)
+def test_validate_string_with_string_abb(string, expected, create_fs_abb):
+    assert validate_string(create_fs_abb, string) == expected
+
+
+@pytest.mark.parametrize(
+    "string, expected",
+    [
+        (" ", False),
+        ("", False),
+        ("def", False),
+        ("+def", False),
+        ("3", True),
+        (".11", False),
+        ("1111", True),
+        ("1.", False),
+        ("13.12", True),
+        ("1234.12E+7", True),
+        ("115.23E+", False),
+        ("163.23E", False),
+    ],
+)
+def test_validate_digits(string, expected, create_fs_d):
+    assert validate_string(create_fs_d, string) == expected
+
+
+@pytest.mark.parametrize(
+    "string, expected",
+    [
+        ("qwerty", "The language wasn't found"),
+        ("aabb", "This is abb-type language"),
+        ("1111", "This is Digits"),
+        ("1.E", "The language wasn't found"),
+    ],
+)
+def test_output_match(string, expected):
+    assert speaker(string) == expected

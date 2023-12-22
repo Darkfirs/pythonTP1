@@ -13,7 +13,7 @@ def safe_call(func):
                 "function": func.__name__,
                 "exception_type": type(e).__name__,
                 "exception_message": str(e),
-                "traceback": traceback.format_exc()
+                "traceback": traceback.format_exc(),
             }
             warning_message = (
                 f"Warning:\n"
@@ -24,6 +24,7 @@ def safe_call(func):
             )
             warnings.warn(warning_message, category=UserWarning)
             return None
+
     return wrapper
 
 

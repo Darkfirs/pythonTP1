@@ -5,7 +5,7 @@ import warnings
 
 @safe_call
 def ex_funct_1(a, b):
-    return a+b
+    return a + b
 
 
 @safe_call
@@ -15,11 +15,7 @@ def ex_funct_2(a, b):
 
 @pytest.mark.parametrize(
     "num_1, num_2, expected",
-    [
-        (5, 10, 15),
-        (20, 10, 30),
-        (1, 2, 3)
-    ],
+    [(5, 10, 15), (20, 10, 30), (1, 2, 3)],
 )
 def test_work_functions_correct(num_1, num_2, expected):
     assert ex_funct_1(num_1, num_2) == expected
@@ -27,9 +23,7 @@ def test_work_functions_correct(num_1, num_2, expected):
 
 @pytest.mark.parametrize(
     "num_1, num_2, expected",
-    [
-        (2, 0, None)
-    ],
+    [(2, 0, None)],
 )
 def test_work_functions_error(num_1, num_2, expected, capsys):
     with capsys.disabled():
@@ -50,9 +44,7 @@ def test_work_functions_error(num_1, num_2, expected, capsys):
 
 @pytest.mark.parametrize(
     "num_1, num_2, expected",
-    [
-        (2, "b", None)
-    ],
+    [(2, "b", None)],
 )
 def test_work_functions_error_strtyps(num_1, num_2, expected, capsys):
     with capsys.disabled():

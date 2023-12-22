@@ -26,16 +26,3 @@ def safe_call(func):
             return None
 
     return wrapper
-
-
-@safe_call
-def example_function(dividend, divisor):
-    result = dividend / divisor
-    return result
-
-
-result = example_function(10, 2)
-print("Result:", result)
-
-result = example_function(10, "b")
-print("Result:", result)
